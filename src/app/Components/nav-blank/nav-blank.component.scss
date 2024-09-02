@@ -1,0 +1,130 @@
+// Define color variables
+$primary-color: #333333;       // Dark grey for default link color
+$hover-color: #ff6600;      // Orange for hover state
+$active-color: darken($hover-color, 10%); // Darker orange for active state
+$main-color: #0aad0a;
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $hover-color;
+  }
+
+  &:active {
+    color: $active-color;
+  }
+}
+.navbar {
+  &-brand {
+    .logo-img {
+      height: 40px;
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  &-toggler {
+    box-shadow: none;
+  }
+
+  .nav-link {
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  .social-link {
+    color: black;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  .btn-outline-primary {
+    border-radius: 20px;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $main-color;
+      color: #fff;
+    }
+  }
+
+  &.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+}
+@mixin transition($properties...) {
+  transition: $properties;
+}
+
+@mixin box-shadow($values...) {
+  box-shadow: $values;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+}
+nav{
+  transition: padding 1s;
+}
+/* Style the dropdown toggle icon */
+.nav-link .fas.fa-user {
+  color: #3498db; /* Change this color to match your theme */
+  transition: color 0.3s ease;
+}
+
+.nav-link .fas.fa-user:hover {
+  color: #2ecc71; /* Color on hover */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  background-color: #f8f9fa; /* Light background for the dropdown */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 0; /* Remove default padding */
+  min-width: 180px; /* Set minimum width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Dropdown item styles */
+.dropdown-item {
+  color: #333; /* Text color */
+  padding: 10px 20px; /* Padding for dropdown items */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+
+
+.dropdown-item:hover {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #ffffff2d;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.text-white {
+  color: #fff;
+}
+
+
+.active-link {
+  font-weight: bold; /* Bold the active link */
+  color: white !important; /* Highlight the active link */
+}
+
+

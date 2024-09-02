@@ -1,0 +1,48 @@
+
+:host{
+  margin-top: auto;
+
+}
+// Define color variables
+$primary-color: #333;       // Dark grey for default link color
+$hover-color: #ff6600;      // Orange for hover state
+$active-color: darken($hover-color, 10%); // Darker orange for active state
+
+// Footer styles
+footer {
+  display: flex;
+  justify-content: center;  // Center content horizontally
+  align-items: center;      // Center content vertically
+  flex-direction: column;   // Stack elements vertically
+  text-align: center;       // Center text within elements
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $hover-color;
+    }
+
+    &:active {
+      color: $active-color;
+    }
+  }
+
+  // List item styles
+  li {
+    margin-bottom: 10px; // Add some space between list items
+    list-style: none;    // Remove default list styling
+  }
+
+  // Center the links
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;            // Add space between icons
+    margin-top: 20px;     // Add space above the icons
+  }
+}
+
+// Example HTML structure to match SASS

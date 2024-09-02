@@ -1,0 +1,19 @@
+.section-bg {
+  background-image: url('~src/assets/images/IrF.gif'); /* Using the src alias */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  padding: 20px;
+}
+.link-primary {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    background-color: burlywood;
+    color: black;
+    text-decoration: none;
+  }
+}

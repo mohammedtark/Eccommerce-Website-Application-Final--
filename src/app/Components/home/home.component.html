@@ -1,0 +1,103 @@
+<!--Main Slider-->
+<section class=" py-3">
+<div class="row g-0">
+  <div class="col-md-9">
+    <owl-carousel-o [options]="mainSlideOptions">
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/main-slider-1.jpeg" alt="slider1">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/main-slider-2.jpeg" alt="slider2">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/main-slider-3.jpeg" alt="slider3">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/41nN4nvKaAL._AC_SY200_.jpg" alt="slider4">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/61cSNgtEISL._AC_SY200_.jpg" alt="slider5">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/XCM_Manual_1396328_4379574_Egypt_EG_BAU_GW_DC_SL_Jewelry_379x304_1X._SY304_CB650636675_.jpg" alt="slider6">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/XCM_Manual_1396328_4379575_Egypt_EG_BAU_GW_DC_SL_Bags_Wallets_379x304_1X._SY304_CB650636675_.jpg" alt="slider7">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/XCM_Manual_1446398_4835988_379x304_1X._SY304_CB631345942_.jpg" alt="slider8">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/XCM_Manual_1454862_4881441_379x304_1X._SY304_CB630947473_.jpg" alt="slider9">
+      </ng-template>
+
+      <ng-template carouselSlide>
+        <img height="400" src="./assets/images/XCM_Manual_1533480_5305769_379x304_1X._SY304_CB616236518_.jpg" alt="slider10">
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+  <div class="col-md-3">
+    <img height="200" class="w-100" src="./assets/images/slide-1.jpeg" alt="slide-1">
+    <img height="200" class="w-100" src="./assets/images/slide-2.jpeg" alt="slide-2">
+  </div>
+</div>
+</section>
+<!--Category Slider-->
+<section class="py-4"*ngIf="catgories.length > 0">
+  <h2 class="text-main text-center pb-3 fw-bold">Popular Categories</h2>
+  <owl-carousel-o [options]="CategoryOptions">
+
+    <ng-container *ngFor="let category of catgories">
+      <ng-template carouselSlide>
+        <img height="300" [src]="category.image" [alt]="category.name" [title]="category.name">
+        <h3 class="h6 text-main text-center test">{{category.name}}</h3>
+      </ng-template>
+    </ng-container>
+
+  </owl-carousel-o>
+</section>
+
+<!--products-->
+<section class="py-4" *ngIf="products.length > 0">
+  <h2 class="text-main text-center pb-3 fw-bold">Popular Products</h2>
+  <div class="pb-4">
+    <input type="text" class="form-control w-50 mx-auto form-control-sm my-3" placeholder="Search..." [(ngModel)]="term">
+  </div>
+  <div class="row g-4">
+    <div *ngFor="let product of products |search :term  |slice:0:18" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+      <div class="product h-100 rounded">
+        <!--add-->
+        <i *ngIf="!wishListData.includes($any(product._id))" (click)="addFav(product._id)" class="fa-regular fa-heart heart" ></i>
+        <!--Remove-->
+        <i *ngIf="wishListData.includes($any(product._id))" (click)="removeFAV(product._id)" class="fa-solid fa-heart heart"></i>
+        <header role="button" [routerLink]="['/productdeteils',product._id]">
+          <img class="w-100" [src]="product.imageCover" [title]="product.title" [alt]="product.title">
+        <h3 class="small main fasa3">{{product.title | cuttext:3}}</h3>
+        <h4 class="h6 text-main1 fasa" >{{product.category.name}}</h4>
+        <div class="d-flex align-items-center justify-content-between small">
+          <span class="fasa3">{{product.price}} EGP</span>
+          <span>
+            <p class="mb-0">
+              <i [class.rating-color]="product.ratingsAverage >= item" *ngFor="let item of [1,2,3,4,5]" class="fas fa-star"></i>
+            <span class="text-muted">{{product.ratingsAverage}}</span>
+            </p>
+          </span>
+        </div>
+        </header>
+
+        <footer class="text-center p-4">
+          <button (click)="addProduct(product._id , btnAdd)" #btnAdd  class="main-btn w-100 py-2 ">+Add</button>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+</section>

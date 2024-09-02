@@ -1,0 +1,48 @@
+<section class="container py-5 my-5 p-5 bg-main-light rounded" *ngIf="cart; else message">
+  <div class="d-flex justify-content-between mb-4">
+    <h1 class="h2 fw-bold">Cart Shop</h1>
+    <button class="btn btn-primary btn-lg" [routerLink]="['/payment',cart.data._id]">check out</button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="text-black fs-5 fw-bold">
+      <i class="fas fa-money-bill-wave text-dark"></i> Total Price:
+      <span class="text-main fs-4">{{cart.data.totalCartPrice}}</span> EGP
+    </p>
+    <h3 class="text-black fs-5 fw-bold">
+      <i class="fas fa-calculator"></i> Total Number Of Items:
+      <span class="text-main fs-4">{{cart.numOfCartItems}}</span>
+    </h3>
+  </div>
+
+  <div class="row border-bottom my-3 d-flex align-items-center p-2" *ngFor="let item of cart.data.products">
+    <div class="col-md-2">
+      <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+    </div>
+    <div class="col-md-10 d-flex justify-content-between">
+      <div>
+        <h5 class="fw-bold">{{item.product.title}}</h5>
+        <h6 class="fw-bold">{{item.price}} EGP</h6>
+        <button #btnRemove class="btn btn-sm m-0 p-0 text-danger" (click)="removeItem(item.product.id, btnRemove)">
+          <i class="fas fa-trash-can"></i> Remove
+        </button>
+      </div>
+      <div>
+        <button #BTN1 class="btn btn-count btn-md" (click)="updataCart(item.product.id, item.count + 1, BTN1, BTN2)">+</button>
+        <span class="mx-3">{{item.count}}</span>
+        <button #BTN2 class="btn btn-count btn-md" (click)="updataCart(item.product.id, item.count - 1, BTN1, BTN2)">-</button>
+      </div>
+    </div>
+  </div>
+  <div class="text-center my-5">
+    <button (click)="Clear()" class="btn btn-sm btn-outline-danger">
+      Clear All Cart
+    </button>
+  </div>
+</section>
+
+<ng-template #message>
+  <div class="text-center py-5">
+    <h2 class="text-danger">No data available at the moment<span class="loading-dots"></span></h2>
+  </div>
+</ng-template>

@@ -1,0 +1,137 @@
+<nav #navBar class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" routerLink="">
+      <img
+        src="./assets/images/freshcart-logo.svg"
+        alt="fresh cart logo"
+        class="logo-img"
+      />
+
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/Cart"
+            >Cart</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/allorders"
+            >AllOrders</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/products"
+            >Products</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/brands"
+            >Brands</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/categories"
+            >Categories</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active-link"
+            routerLink="/whislist"
+            >WhistList</a
+          >
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-center">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user fa-xl text-main "></i>
+          </a>
+          <ul class="dropdown-menu bg-primary">
+            <li role="button" routerLink="/forgetpassword" routerLinkActive="active-link">
+              <a class="dropdown-item text-white">Forget Password</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative"
+            routerLink="/Cart"
+            ><i class="fas fa-cart-shopping fs-3 text-main "></i>
+            <span class="badge bg-info position-absolute top-0 end-0">{{CratNumber}}</span>
+            </a
+          >
+        </li>
+        <li class="nav-item d-flex gap-3 me-4">
+          <a href="https://www.instagram.com" target="_blank" class="social-link"
+            ><i class="fab fa-instagram fs-4"></i
+          ></a>
+          <a href="https://www.facebook.com" target="_blank" class="social-link"
+            ><i class="fab fa-facebook fs-4"></i
+          ></a>
+          <a href="https://www.tiktok.com" target="_blank" class="social-link"
+            ><i class="fab fa-tiktok fs-4"></i
+          ></a>
+          <a href="https://www.twitter.com" target="_blank" class="social-link"
+            ><i class="fab fa-twitter fs-4"></i
+          ></a>
+          <a href="https://www.youtube.com" target="_blank" class="social-link"
+            ><i class="fab fa-youtube fs-4"></i
+          ></a>
+          <a href="https://web.whatsapp.com/" target="_blank" class="social-link">
+            <i class="fab fa-whatsapp fs-4"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <span
+            class="nav-link btn btn-outline-primary "
+            (click)="signOut()"
+            role="button"
+            >Sign Out</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

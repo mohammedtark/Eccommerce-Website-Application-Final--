@@ -1,0 +1,18 @@
+// Define color variables
+$primary-color: #333;       // Dark grey for default link color
+$hover-color: #ff6600;      // Orange for hover state
+$active-color: darken($hover-color, 10%); // Darker orange for active state
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $hover-color;
+  }
+
+  &:active {
+    color: $active-color;
+  }
+}
