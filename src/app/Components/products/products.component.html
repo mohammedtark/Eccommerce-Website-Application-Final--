@@ -1,10 +1,13 @@
 <section class="py-4" *ngIf="products.length > 0">
-  <h2 class="text-main text-center pb-3 fw-bold">Popular Products</h2>
+  <h2 class="text-main text-center pb-3 fw-bold">All Products</h2>
   <div class="pb-4">
     <input type="text" class="form-control w-50 mx-auto form-control-sm my-3" placeholder="Search..." [(ngModel)]="term">
   </div>
-  <div class="row g-4">
-    <div *ngFor="let product of products |search :term  |slice:0:18" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+  <div class="row g-4 justify-content-center">
+    <div *ngFor="let product of products |search :term | paginate: { id: 'productPaginate',
+    itemsPerPage: pageSize,
+    currentPage: currentPage,
+    totalItems: total }" class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
       <div class="product h-100 rounded">
         <!--add-->
         <i *ngIf="!wishListData.includes($any(product._id))" (click)="addFav(product._id)" class="fa-regular fa-heart heart" ></i>
@@ -12,7 +15,7 @@
         <i *ngIf="wishListData.includes($any(product._id))" (click)="removeFAV(product._id)" class="fa-solid fa-heart heart"></i>
         <header role="button" [routerLink]="['/productdeteils',product._id]">
           <img class="w-100" [src]="product.imageCover" [title]="product.title" [alt]="product.title">
-        <h3 class="small main fasa3">{{product.title | cuttext:3}}</h3>
+        <h3 class="small main fasa3">{{product.title | cuttext:2}}</h3>
         <h4 class="h6 text-main1 fasa" >{{product.category.name}}</h4>
         <div class="d-flex align-items-center justify-content-between small">
           <span class="fasa3">{{product.price}} EGP</span>
@@ -31,5 +34,21 @@
 
       </div>
     </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <pagination-controls  id="productPaginate"
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      [maxSize]="9"
+                      [directionLinks]="true"
+                      [autoHide]="true"
+                      [responsive]="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls>
   </div>
 </section>

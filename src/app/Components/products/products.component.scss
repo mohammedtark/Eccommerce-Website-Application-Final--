@@ -100,3 +100,64 @@ $input-hover: #e0e7ef; // Slight hover effect for inputs
     }
   }
 }
+
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+pagination-controls {
+  .ngx-pagination {
+    .pagination {
+      display: flex;
+      padding: 0;
+      list-style: none;
+      border-radius: 0.5rem; // لتنعيم حواف العنصر
+      background-color: #ffffff; // لون الخلفية الأساسي
+
+      li {
+        &.current {
+          a {
+            background-color: #ff6f61; // لون مميز للصفحة الحالية
+            color: white; // لون النص في الصفحة الحالية
+            border-color: #ff6f61;
+            font-weight: bold; // لجعل النص بارزاً
+          }
+        }
+
+        a {
+          display: block;
+          padding: 0.5rem 0.75rem; // حجم الأزرار
+          margin: 0 0.125rem;
+          border: 1px solid #ddd; // لون الحدود العادي
+          border-radius: 0.5rem; // تنعيم الحواف
+          color: #343a40; // لون النص الأساسي
+          text-decoration: none;
+          background-color: #f1f1f1; // خلفية الأزرار
+          transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s; // تأثير التغيير التدريجي
+
+          &:hover {
+            background-color: #6c757d; // لون الخلفية عند التحويم
+            color: white; // لون النص عند التحويم
+            border-color: #6c757d; // لون الحدود عند التحويم
+            transform: translateY(-2px); // تحريك للأعلى قليلاً عند التحويم
+          }
+        }
+      }
+
+      .pagination-previous,
+      .pagination-next {
+        a {
+          color: #343a40; // لون النص للأزرار "السابق" و "التالي"
+          &:hover {
+            color: #ffffff; // لون النص عند التحويم على "السابق" و "التالي"
+            background-color: #007bff; // خلفية زرقاء عند التحويم
+            border-color: #007bff;
+          }
+        }
+      }
+    }
+  }
+}

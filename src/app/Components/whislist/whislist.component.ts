@@ -10,63 +10,78 @@ import { CartService } from 'src/app/core/services/cart.service';
 @Component({
   selector: 'app-whislist',
   standalone: true,
-  imports: [CommonModule,RouterLink , CuttextPipe],
+  imports: [CommonModule, RouterLink, CuttextPipe],
   templateUrl: './whislist.component.html',
   styleUrls: ['./whislist.component.scss']
 })
 export class WhislistComponent implements OnInit {
 
-  constructor(private _WhishlistService:WhishlistService,private _ToastrService:ToastrService , private _Renderer2:Renderer2 , private _CartService:CartService){}
+  products: product[] = [];
+  wishListData: string[] = [];
 
-  products:product[]=[];
-  wishListData:string[]=[]
+  constructor(
+    private _WhishlistService: WhishlistService,
+    private _ToastrService: ToastrService,
+    private _Renderer2: Renderer2,
+    private _CartService: CartService
+  ) {}
+
   ngOnInit(): void {
     this._WhishlistService.getWhishlist().subscribe({
-      next:(response)=>{
-        console.log(response)
-        this.products = response.data
-        const newData = response.data.map((item:any)=>item._id)
-        this.wishListData =newData
+      next: (response) => {
+        this.products = response.data;
+        this.wishListData = response.data.map((item: any) => item._id);
       }
-    })
+    });
+
+    // Update count from service on initialization
+
   }
 
-  addFav(proId:string |undefined):void{
+  addFav(proId: string | undefined): void {
     this._WhishlistService.addToWhishlist(proId).subscribe({
-      next:(response)=>{
-        this._ToastrService.success(response.message)
-        this.wishListData = response.data
+      next: (response) => {
+        this._ToastrService.success(response.message);
+        this.wishListData = response.data.map((item: any) => item._id);
+        this._WhishlistService.updateWhishlistCount();
       }
-    })
+    });
   }
 
-
-  addProduct(id :any, element:HTMLButtonElement): void
-  {
-    this._Renderer2.setAttribute(element,'disabled','true')
+  addProduct(id: any, element: HTMLButtonElement): void {
+    this._Renderer2.setAttribute(element, 'disabled', 'true');
     this._CartService.AddToCart(id).subscribe({
-      next:(response)=>{
-        console.log("hi");
-        console.log(response.message);
-        this._ToastrService.success("It has been successfully added. \u{1f6fa}")
-        this._Renderer2.removeAttribute(element,'disabled');
-        this._CartService.cartNumber.next(response.numOfCartItems)
+      next: (response) => {
+        this._ToastrService.success("It has been successfully added. \u{1f6fa}");
+        this._Renderer2.removeAttribute(element, 'disabled');
+        this._CartService.cartNumber.next(response.numOfCartItems);
       },
-      error: (err)=>{
-        this._Renderer2.removeAttribute(element,'disabled');
+      error: (err) => {
+        this._Renderer2.removeAttribute(element, 'disabled');
       }
-
-    })
+    });
   }
 
-  removeFAV(prod:string |undefined):void{
+  removeFAV(prod: string | undefined): void {
+    if (!prod) return; // Check if the product ID is valid
+
     this._WhishlistService.RemoveWhishlist(prod).subscribe({
-      next:(response)=>{
-        this._ToastrService.success(response.message)
-        this.wishListData = response.data
-        const newProductData = this.products.filter((item:any)=>this.wishListData.includes(item._id))
-        this.products=newProductData
+      next: (response) => {
+        this._ToastrService.success(response.message);
+
+        // Update the wishlist count
+        this._WhishlistService.updateWhishlistCount();
+
+        // Remove the specific item from the wishlist data
+        this.wishListData = this.wishListData.filter((itemId: string) => itemId !== prod);
+
+        // Remove the specific product from the products array
+        this.products = this.products.filter((item: product) => item._id !== prod);
+      },
+      error: (err) => {
+        // Handle any error cases here, such as displaying an error message
+        this._ToastrService.error('Failed to remove item from wishlist.');
       }
-    })
+    });
   }
 }

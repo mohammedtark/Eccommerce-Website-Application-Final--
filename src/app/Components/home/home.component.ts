@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
       next:(response)=>{
         const newData = response.data.map((item:any)=>item._id)
         this.wishListData =newData
+        this._WhishlistService.WhishlistCount.next(response.count);
       }
     })
   }

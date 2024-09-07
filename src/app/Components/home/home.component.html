@@ -80,7 +80,7 @@
         <i *ngIf="wishListData.includes($any(product._id))" (click)="removeFAV(product._id)" class="fa-solid fa-heart heart"></i>
         <header role="button" [routerLink]="['/productdeteils',product._id]">
           <img class="w-100" [src]="product.imageCover" [title]="product.title" [alt]="product.title">
-        <h3 class="small main fasa3">{{product.title | cuttext:3}}</h3>
+        <h3 class="small main fasa3">{{product.title | cuttext:2}}</h3>
         <h4 class="h6 text-main1 fasa" >{{product.category.name}}</h4>
         <div class="d-flex align-items-center justify-content-between small">
           <span class="fasa3">{{product.price}} EGP</span>
